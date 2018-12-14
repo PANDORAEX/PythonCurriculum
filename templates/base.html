@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <style>
+        hr.style1 {
+            background-image: linear-gradient(90deg, blue, transparent);
+            border: 0;
+            height: 3px;
+        }
+        hr.style2{
+            height: 3px;
+            border: 0;
+            background-color: blue;
+        }
+        {% block style %}
+        {% endblock %}
+    </style>
+    {% block script %}
+    {% endblock %}
+</head>
+<body>
+    <br>
+    <hr class="style1">
+    <table>
+        <tr>
+            <td width = "100%"><b style="color:blue;">Welcome to 案件管理ボータル</b></td>
+            <td>{% block button %}{% endblock %}</td>
+        </tr>
+    </table>
+    <hr class="style1">
+    <br>
+    <br>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

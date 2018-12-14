@@ -1,0 +1,25 @@
+﻿{% extends 'base.html' %}
+{% block title %}メニュー{% endblock %}
+{% block script %}
+    <script type="text/javascript">
+        function closeWindowNoPrompt() {
+            window.open('', '_parent', '');
+            window.close();
+        }
+    </script>
+{% endblock %}
+{% block button %}
+    <input type="button" value="閉じる" onClick="
+            if(window.confirm('システムを終了します。よろしいですか？')){closeWindowNoPrompt()}"
+                       style="background-color:#0362ff;color:white;WIDTH: 100px; HEIGHT: 30px">
+{% endblock %}
+{% block content %}
+    <font size = "5pt" color = "blue">メニュー</font>
+    <hr class="style2">
+    <b>使用する機能を選択してください</b>
+    <hr width="90%" align="left" style="height: 2px;border: 0;background-color: #c8c8c8">
+    <br>
+    <input type="button" value="新規登録" onClick="location.href='/add'" style="background-color:#0362ff;color:white;WIDTH: 150px; HEIGHT: 30px">
+    <br>
+    <input type="button" value="一覧表示" onClick="location.href='/list'" style="background-color:#0362ff;color:white;WIDTH: 150px; HEIGHT: 30px">
+{% endblock %}

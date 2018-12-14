@@ -1,0 +1,110 @@
+﻿{% extends 'base.html' %}
+{% block title %}新規登録{% endblock %}
+{% block style %}
+        textarea{
+            width: 800px;
+            height: 50px;
+            resize: none;
+            overflow-y: scroll;
+        }
+        .mylabel{
+            background-color: #0362ff;
+            color: white;
+            width: 160px;
+        }
+{% endblock %}
+{% block script %}
+    <script type="text/javascript">
+        function reset_blank(){
+            document.getElementById("id_start_date").innerText = "";
+            document.getElementById("id_project_no").innerText = "";
+            document.getElementById("id_project_name").innerText = "";
+            document.getElementById("id_protype_code").options[0].selected = true;
+            document.getElementById("id_language_code").options[0].selected = true;
+            document.getElementById("id_summary").innerText = "";
+            document.getElementById("id_status_code").options[0].selected = true;
+            document.getElementById("id_customer").innerText = "";
+            document.getElementById("id_charge").innerText = "";
+            document.getElementById("id_reviewer").innerText = "";
+            document.getElementById("id_release_date").innerText = "";
+            document.getElementById("id_remarks").innerText = "";
+        }
+    </script>
+{% endblock %}
+{% block button %}
+    <input type="button" value="戻る" onClick="location.href='/index'" style="background-color:#0362ff;color:white;WIDTH: 100px; HEIGHT: 30px">
+{% endblock %}
+{% block content %}
+    <font size = "5pt" color = "blue"><b>新規登録</b></font>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b>必要事項を入力し登録を行ってください</b>
+    <hr class="style2">
+    <br>
+    <div style="color: red">
+        {% if message_add %}
+            {{ message_add | linebreaksbr  }}
+        {% endif %}
+    </div>
+    <form action ="/add/" method="post">
+        {% csrf_token %}
+    <fieldset style="border: 1px solid #000000; padding: 10px;-webkit-border-radius: 5px;border-color: gainsboro;width: 1100px">
+    <legend><b>新規明細登録</b></legend>
+        <table style="table-layout: fixed">
+            <tr>
+                <td class ="mylabel">発生日</td><td>{{ add_form.start_date }}</td>
+            </tr>
+            <tr>
+                <td class ="mylabel">案件番号</td>
+                <td>
+                    {{ add_form.project_no }}
+                </td>
+            </tr>
+            <tr>
+                <td class ="mylabel">案件名</td><td>{{ add_form.project_name }}</td>
+            </tr>
+            <tr>
+                <td class ="mylabel">工程区分</td>
+                <td>
+                    {{ add_form.protype_code }}
+                </td>
+            </tr>
+            <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
+            <tr>
+                <td class ="mylabel">開発言語</td>
+                <td>
+                    {{ add_form.language_code }}
+                </td>
+            </tr>
+            <tr>
+                <td class ="mylabel">概要</td><td>{{ add_form.summary }}</td>
+            </tr>
+            <tr>
+                <td class ="mylabel">状態</td>
+                <td>
+                    {{ add_form.status_code }}
+                </td>
+            </tr>
+            <tr>
+                <td class ="mylabel">お客様担当者</td><td>{{ add_form.customer }}</td>
+            </tr>
+            <tr>
+                <td class ="mylabel">担当者</td><td>{{ add_form.charge }}</td>
+            </tr>
+            <tr>
+                <td class ="mylabel">レビュー者</td><td>{{ add_form.reviewer }}</td>
+            </tr>
+            <tr>
+                <td class ="mylabel">リリース日</td><td>{{ add_form.release_date }}</td>
+            </tr>
+            <tr>
+                <td class ="mylabel">備考</td><td>{{ add_form.remarks }}</td>
+            </tr>
+        </table></fieldset>
+    <table><tr></tr></table>
+    <table style="width: 100%;height: 40px;background-color:#0362ff;">
+        <tr>
+            <td align ="right"><input type="submit" value="登録" style="WIDTH: 110px; HEIGHT: 30px;"></td>
+            <td><input type="button" value="リセット" style="WIDTH: 110px; HEIGHT: 30px" onclick="reset_blank()"></td>
+        </tr>
+    </table>
+    </form>
+    <br>
+{% endblock %}

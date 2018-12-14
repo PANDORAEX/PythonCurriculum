@@ -1,0 +1,74 @@
+﻿{% extends 'base.html' %}
+{% block title %}感情分析{% endblock %}
+{% block style %}
+        textarea{
+            width: 800px;
+            height: 300px;
+            resize: none;
+            overflow-y: scroll;
+        }
+        .mylabel{
+            background-color: #0362ff;
+            color: white;
+            width: 160px;
+        }
+        .mylabel2{
+            background-color: #0362ff;
+            color: white;
+
+        }
+{% endblock %}
+{% block script %}
+    <script type="text/javascript">
+        function reset_blank(){
+            document.getElementById("id_input_text").innerText = "";
+        }
+    </script>
+{% endblock %}
+{% block button %}
+    <input type="button" value="戻る" onClick="location.href='/index'" style="background-color:#0362ff;color:white;WIDTH: 100px; HEIGHT: 30px">
+{% endblock %}
+{% block content %}
+    <font size = "5pt" color = "blue"><b>感情分析</b></font>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b>テキストを入力してください</b>
+    <hr class="style2">
+    <br>
+
+    <form action ="/emotion/" method="post">
+        {% csrf_token %}
+    <fieldset style="border: 1px solid #000000; padding: 10px;-webkit-border-radius: 5px;border-color: gainsboro;width: 1100px">
+    <legend><b>テキスト入力</b></legend>
+        <table style="table-layout: fixed">
+            <tr>
+                <td class ="mylabel">処理テキスト</td><td>{{ emotion_form.input_text }}</td>
+            </tr>
+        </table></fieldset>
+    <table><tr></tr></table>
+    <table style="width: 100%;height: 40px;background-color:#0362ff;">
+        <tr>
+            <td align ="right"><input type="submit" value="分析" style="WIDTH: 110px; HEIGHT: 30px;"></td>
+            <td><input type="button" value="リセット" style="WIDTH: 110px; HEIGHT: 30px" onclick="reset_blank()"></td>
+        </tr>
+    </table>
+    </form>
+    <br>
+    {% if result %}
+    <div style="color: red"><b>
+
+            {{ result | linebreaksbr  }}
+
+    </b></div>
+    <table width="100%" border="1" style="text-align: center">
+        <tr>
+        <td class ="mylabel2" width="80%">内容</td><td  class ="mylabel2" width="10%">満足度</td><td class ="mylabel2" width="10%">感情振れ幅</td>
+        </tr>
+        {% for content,data in detail.items %}
+            <tr>
+            <td>{{ content }}</td>
+            {% for v in data %}
+                <td>{{ v }}</td>
+            {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+{% endblock %}
